@@ -16,3 +16,15 @@ zuul:
     orders:
       path: /orders/**
       serviceId: order-service
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+
+ribbon:
+  ConnectTimeout: 4000
+  ReadTimeout: 4000

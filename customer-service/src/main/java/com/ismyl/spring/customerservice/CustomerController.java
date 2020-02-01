@@ -14,6 +14,12 @@ public class CustomerController {
             new Customer(2, "Oh SM")
     );
 
+    private OrderClient orderClient;
+
+    public CustomerController(OrderClient orderClient) {
+        this.orderClient = orderClient;
+    }
+
     @GetMapping
     public List<Customer> getAllCustomers() {
         return customers;
@@ -25,5 +31,10 @@ public class CustomerController {
                 .filter(customer -> customer.getId() == id)
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    @GetMapping("/{id}/orders")
+    public Object getOrdersForCustomer(@PathVariable int id) {
+        return orderClient.getOrdersForCustomer(id);
     }
 }
